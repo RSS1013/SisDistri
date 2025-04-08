@@ -1,0 +1,38 @@
+<project name="ProyectoIMC" default="jar" basedir=".">
+    <!-- Propiedades -->
+	
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="doc.dir" value="doc"/>
+    <property name="jar.file" value="${dist.dir}/proyecto-imc.jar"/>
+
+    <!-- Tarea para compilar el código -->
+    <target name="compile">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false"/>
+    </target>
+
+    <!-- Tarea para generar la documentación con Javadoc -->
+    <target name="doc">
+        <mkdir dir="${doc.dir}"/>
+        <javadoc sourcepath="${src.dir}" destdir="${doc.dir}"/>
+    </target>
+
+    <!-- Tarea que empaqueta los archivos .class en un .jar -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${jar.file}" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="main.Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Tarea que limpia los directorios -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${doc.dir}"/>
+    </target>
+</project>
