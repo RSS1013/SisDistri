@@ -1,8 +1,10 @@
 package Ricardo.SisDisP2.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data  // Genera getters, setters, toString, etc.
 @Table(name = "usuarios")
 public class Usuario {
     @Id
@@ -10,6 +12,4 @@ public class Usuario {
     private Long id;
     private String username;
     private String password;
-
-    // Getters y Setters (usa Lombok si lo prefieres)
 }
