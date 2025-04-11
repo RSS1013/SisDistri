@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sistema_distribuido
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+
+  api-python:
+    build: ./api-python
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+
+  frontend-springboot:
+    build: ./frontend-springboot
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api-python
