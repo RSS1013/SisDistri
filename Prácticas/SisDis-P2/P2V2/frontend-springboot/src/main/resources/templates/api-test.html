@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>API Test</title>
+    <style>
+        #api-result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Llamar a API de Pokémon</h2>
+    <button onclick="callPythonApi('pikachu')">Obtener Pikachu</button>
+    <button onclick="callPythonApi('invalid')">Simular Error</button>
+    <div id="api-result"></div>
+
+    <script>
+        function callPythonApi(pokemonName) {
+            const resultDiv = document.getElementById("api-result");
+            resultDiv.innerHTML = "Cargando...";
+            resultDiv.className = "";
+            
+            fetch(`http://localhost:5000/pokemon/${pokemonName}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error HTTP: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    resultDiv.innerHTML = JSON.stringify(data, null, 2);
+                    resultDiv.className = "";
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `Error: ${error.message}`;
+                    resultDiv.className = "error";
+                    console.error("Error en la llamada API:", error);
+                });
+        }
+    </script>
+</body>
+</html>
