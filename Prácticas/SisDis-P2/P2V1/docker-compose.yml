@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mysql:
     image: mysql:8.0
@@ -10,6 +8,11 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   api-python:
     build: ./api-python
@@ -18,9 +21,12 @@ services:
     depends_on:
       - mysql
 
-  frontend-springboot:
+  frontend-springboot:  # <--- esta línea tenía un espacio de más
     build: ./frontend-springboot
     ports:
       - "8080:8080"
     depends_on:
-      - api-python
+      mysql:
+        condition: service_healthy
+      api-python:
+        condition: service_started
