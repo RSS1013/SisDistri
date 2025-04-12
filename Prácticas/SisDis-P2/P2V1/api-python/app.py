@@ -2,8 +2,11 @@ from flask import Flask, jsonify, request
 import mysql.connector
 import requests  # Para APIs de terceros (Pokémon)
 import os
+from flask_cors import CORS  # Importa CORS
 
 app = Flask(__name__)
+CORS(app)  # Habilita CORS para todos los dominios
+
 
 # Configuración de la base de datos
 db_config = {
