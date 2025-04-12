@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version> <!-- o la versión que uses -->
+        <version>3.1.5</version> 
     </parent>
 	
      <groupId>Ricardo</groupId>
@@ -23,6 +23,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+	<dependency>
+    	   <groupId>org.springframework.boot</groupId>
+    	   <artifactId>spring-boot-starter-test</artifactId>
+    	   <scope>test</scope>
+	<exclusions>
+        	<exclusion>
+            	<groupId>org.junit.vintage</groupId>
+            	<artifactId>junit-vintage-engine</artifactId>
+        	</exclusion>
+    	</exclusions>
+	</dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -31,12 +42,33 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+
+
+
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+<dependencies>
+    <!-- Dependencia para producción -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.33</version>
+    </dependency>
+    
+    <!-- Dependencias de test (sin H2) -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>        
+
+	<dependency>
     	   <groupId>org.projectlombok</groupId>
     	   <artifactId>lombok</artifactId>
     	   <optional>true</optional>
