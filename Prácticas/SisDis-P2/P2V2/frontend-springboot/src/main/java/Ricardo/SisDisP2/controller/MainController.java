@@ -4,6 +4,8 @@ import Ricardo.SisDisP2.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.Arrays;
+
 
 @Controller
 public class MainController {
@@ -29,8 +31,11 @@ public class MainController {
         }
     }
 
+    
     @GetMapping("/api-test")
-    public String apiTest() {
-        return "api-test";
+    public String apiTest(Model model) {
+    model.addAttribute("pokemonList", 
+        Arrays.asList("pikachu", "charizard", "bulbasaur", "squirtle"));
+    return "api-test";
     }
 }
