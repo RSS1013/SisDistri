@@ -21,7 +21,7 @@ services:
     depends_on:
       - mysql
 
-  frontend-springboot:  # <--- esta línea tenía un espacio de más
+  frontend-springboot:
     build: ./frontend-springboot
     ports:
       - "8080:8080"

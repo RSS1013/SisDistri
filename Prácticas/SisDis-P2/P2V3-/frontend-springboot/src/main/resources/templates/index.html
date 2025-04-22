@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExceptTester - Home</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">ExceptTester</div>
+        <nav>
+            <a href="/">Home</a>
+            <a th:href="@{/login}">Login</a>
+            <a href="#">Testing</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Sistema Distribuido de Excepciones</h1>
+        <p>Una plataforma moderna para probar excepciones y API interacciones en sistemas distribuidos.</p>
+        <a th:href="@{/login}" class="btn">Testing →</a>
+    </section>
+
+    <div class="container">
+        <div class="features">
+            <div class="section feature-card">
+                <h3>Simulación de Errores de Base de Datos</h3>
+                <p>Simula y captura errores de conexión, consultas y transacciones en bases de datos.</p>
+                <a href="#" class="btn">Probar ahora →</a>
+            </div>
+            <div class="section feature-card">
+                <h3>Pruebas de API externas</h3>
+                <p>Interactúa con APIs externas como PokeAPI y maneja respuestas y errores de forma elegante.</p>
+                <a href="#" class="btn">Explorar funciones →</a>
+            </div>
+            <div class="section feature-card">
+                <h3>Manejo de Excepciones Personalizado</h3>
+                <p>Simula errores de archivos y observa cómo se manejan las excepciones en el sistema.</p>
+                <a href="#" class="btn">Ver ejemplo →</a>
+            </div>
+        </div>
+
+        <div class="section text-center">
+            <h2>¿Por qué usar nuestro sistema?</h2>
+            <div class="benefits-list mt-3">
+                <div class="benefit-item">Pruebas Simuladas - Simula errores sin riesgos reales en tu ambiente de producción.</div>
+                <div class="benefit-item">Resultados Detallados - Visualiza errores y respuestas con formato claro y legible.</div>
+                <div class="benefit-item">Interfaz Intuitiva - Diseño moderno y fácil de usar para pruebas eficientes.</div>
+                <div class="benefit-item">Integración API - Prueba tus integraciones con APIs externas fácilmente.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>ExceptTester</h3>
+                <p>A modern interface for testing exceptions and API interactions.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a th:href="@{/login}">Login</a></li>
+                    <li><a href="#">Testing Interface</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://pokeapi.co/">PokeAPI</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Reference</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: info@excepttester.com</li>
+                    <li>Support: support@excepttester.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 ExceptTester. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
