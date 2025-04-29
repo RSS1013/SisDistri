@@ -269,40 +269,29 @@ footer {
 }
 
 /* Página específica: API Test */
-.pokemon-selector {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* La columna izquierda ocupa 1fr y la derecha 2fr del espacio disponible */
+    gap: 2rem; /* Espacio entre las columnas */
+    margin-bottom: 2rem; /* Espacio inferior para separar de otras secciones */
 }
 
-.exception-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border-radius: var(--border-radius);
+.grid-left {
+    /* Los elementos dentro de grid-left se apilarán verticalmente (comportamiento por defecto) */
 }
 
-.result-container {
-    min-height: 200px;
-    padding: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
+.grid-right {
+    /* Contenedor para la sección de resultados */
 }
 
 .pokemon-selector {
     display: flex;
-    flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 1.5rem;
 }
 
 .pokemon-selector select {
-    flex: 1;
-    min-width: 250px;
+    flex-grow: 1; /* El select ocupa todo el espacio disponible */
     padding: 0.7rem 1rem;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -317,3 +306,16 @@ footer {
     border: none;
     cursor: pointer;
 }
+
+.exception-simulator.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajusta el minmax según necesites */
+    gap: 1.5rem;
+    padding-top: 1rem; /* Añade un poco de espacio superior si es necesario */
+}
+
+.exception-card {
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5

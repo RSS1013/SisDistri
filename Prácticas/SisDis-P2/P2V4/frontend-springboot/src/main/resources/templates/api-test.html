@@ -22,37 +22,42 @@
             <p>Interfaz para probar excepciones y consultas a APIs externas</p>
         </div>
 
-        <div class="section">
-            <h2>Buscador de Pokémon</h2>
-            <div class="pokemon-selector">
-                <select id="pokemon-select">
-                    <option value="">Selecciona un Pokémon</option>
-                </select>
-                <button id="search-btn" onclick="searchPokemon()">Buscar</button>
-            </div>
-        </div>
+        <div class="grid-container">
+            <div class="grid-left">
+                <div class="section">
+                    <h2>Buscador de Pokémon</h2>
+                    <div class="pokemon-selector">
+                        <select id="pokemon-select">
+                            <option value="">Selecciona un Pokémon</option>
+                        </select>
+                        <button id="search-btn" onclick="searchPokemon()">Buscar</button>
+                    </div>
+                </div>
 
-        <div class="section">
-            <h2>Simulador de Excepciones</h2>
-            <div class="exception-simulator">
-                <div class="exception-item">
-                    <button class="btn btn-secondary" onclick="triggerException('file')">Error de Archivo</button>
-                    <span>Intenta leer un archivo inexistente</span>
-                </div>
-                <div class="exception-item">
-                    <button class="btn btn-secondary" onclick="triggerException('database')">Error de Base de Datos</button>
-                    <span>Credenciales incorrectas de MySQL</span>
-                </div>
-                <div class="exception-item">
-                    <button class="btn btn-secondary" onclick="triggerException('api')">Error de API Externa</button>
-                    <span>Falla en llamada a PokeAPI</span>
+                <div class="section">
+                    <h2>Simulador de Excepciones</h2>
+                    <div class="exception-simulator features">
+                        <div class="feature-card exception-card file-error" onclick="triggerException('file')">
+                            <h3>Error de Archivo</h3>
+                            <p>Intenta leer un archivo inexistente</p>
+                        </div>
+                        <div class="feature-card exception-card database-error" onclick="triggerException('database')">
+                            <h3>Error de Base de Datos</h3>
+                            <p>Credenciales incorrectas de MySQL</p>
+                        </div>
+                        <div class="feature-card exception-card api-error" onclick="triggerException('api')">
+                            <h3>Error de API Externa</h3>
+                            <p>Falla en llamada a PokeAPI</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="section">
-            <h3>Resultado:</h3>
-            <div id="result" class="result-container">Selecciona una acción...</div>
+            <div class="grid-right">
+                <div class="section">
+                    <h3>Resultado:</h3>
+                    <div id="result" class="result-container">Selecciona una acción...</div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -154,8 +159,8 @@
             }
             return response.json().then(data => {
                 const resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = `<strong>Status:</strong> ${data.status || 'success'}<br><br>` + 
-                                      `<strong>Data:</strong><pre>${JSON.stringify(data.data || data, null, 2)}</pre>`;
+                resultDiv.innerHTML = `<strong>Status:</strong> ${data.status || 'success'}<br><br>` +
+                                            `<strong>Data:</strong><pre>${JSON.stringify(data.data || data, null, 2)}</pre>`;
                 resultDiv.className = 'result-container success';
             });
         }
@@ -166,8 +171,8 @@
                 try {
                     const errData = JSON.parse(error.message);
                     resultDiv.innerHTML = `<strong>Error Type:</strong> ${errData.type || 'UNKNOWN'}<br><br>` +
-                                          `<strong>Message:</strong> ${errData.message}<br><br>` +
-                                          `<strong>Details:</strong><pre>${errData.details || 'No details'}</pre>`;
+                                                `<strong>Message:</strong> ${errData.message}<br><br>` +
+                                                `<strong>Details:</strong><pre>${errData.details || 'No details'}</pre>`;
                 } catch (e) {
                     resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
                 }
