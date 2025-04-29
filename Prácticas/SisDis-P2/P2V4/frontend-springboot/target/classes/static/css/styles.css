@@ -311,11 +311,4 @@ footer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajusta el minmax según necesites */
     gap: 1.5rem;
-    padding-top: 1rem; /* Añade un poco de espacio superior si es necesario */
-}
-
-.exception-card {
-    background-color: var(--secondary-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    padding: 1.5
+    padding-top: 1rem

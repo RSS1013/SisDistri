@@ -38,16 +38,25 @@
                     <h2>Simulador de Excepciones</h2>
                     <div class="exception-simulator features">
                         <div class="feature-card exception-card file-error" onclick="triggerException('file')">
-                            <h3>Error de Archivo</h3>
-                            <p>Intenta leer un archivo inexistente</p>
+                            <div class="exception-card-content">
+                                <h3>Error de Archivo</h3>
+                                <p>Intenta leer un archivo inexistente</p>
+                            </div>
+                            <button class="btn">Ver</button>
                         </div>
                         <div class="feature-card exception-card database-error" onclick="triggerException('database')">
-                            <h3>Error de Base de Datos</h3>
-                            <p>Credenciales incorrectas de MySQL</p>
+                            <div class="exception-card-content">
+                                <h3>Error de Base de Datos</h3>
+                                <p>Credenciales incorrectas de MySQL</p>
+                            </div>
+                            <button class="btn">Ver</button>
                         </div>
                         <div class="feature-card exception-card api-error" onclick="triggerException('api')">
-                            <h3>Error de API Externa</h3>
-                            <p>Falla en llamada a PokeAPI</p>
+                            <div class="exception-card-content">
+                                <h3>Error de API Externa</h3>
+                                <p>Falla en llamada a PokeAPI</p>
+                            </div>
+                            <button class="btn">Ver</button>
                         </div>
                     </div>
                 </div>
