@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DisSis - ExceptTester - Pruebas de Excepciones</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <header>
+        <div class="logo">ExceptTester</div>
+        <nav>
+            <a href="/">Home</a>
+            <a th:href="@{/login}">Login</a>
+            <a href="#">Testing</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="section">
+            <h1>Pruebas de Excepciones</h1>
+            <p>Interfaz para probar excepciones y consultas a APIs externas</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="grid-left">
+                <div class="section">
+                    <h2>Buscador de Pokémon</h2>
+                    <div class="pokemon-selector">
+                        <select id="pokemon-select">
+                            <option value="">Selecciona un Pokémon</option>
+                        </select>
+                        <button id="search-btn" onclick="searchPokemon()">Buscar</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Simulador de Excepciones</h2>
+                    <div class="exception-simulator features">
+                        <div class="feature-card exception-card file-error" onclick="triggerException('file')">
+                            <div class="exception-card-content">
+                                <h3>Error de Archivo</h3>
+                                <p>Intenta leer un archivo inexistente</p>
+                            </div>
+                            <button class="btn">Ver</button>
+                        </div>
+                        <div class="feature-card exception-card database-error" onclick="triggerException('database')">
+                            <div class="exception-card-content">
+                                <h3>Error de Base de Datos</h3>
+                                <p>Credenciales incorrectas de MySQL</p>
+                            </div>
+                            <button class="btn">Ver</button>
+                        </div>
+                        <div class="feature-card exception-card api-error" onclick="triggerException('api')">
+                            <div class="exception-card-content">
+                                <h3>Error de API Externa</h3>
+                                <p>Falla en llamada a PokeAPI</p>
+                            </div>
+                            <button class="btn">Ver</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-right">
+                <div class="section">
+                    <h3>Resultado:</h3>
+                    <div id="result" class="result-container">Selecciona una acción...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>ExceptTester</h3>
+                <p>A modern interface for testing exceptions and API interactions.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a th:href="@{/login}">Login</a></li>
+                    <li><a href="#">Testing Interface</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://pokeapi.co/">PokeAPI</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Reference</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: rss1013@alu.ubu.es</li>
+                    <li>Support: rss1013@alu.ubu.es</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 ExceptTester. All rights reserved.
+        </div>
+    </footer>
+
+    <script th:inline="javascript">
+        const API_BASE_URL = 'http://localhost:5000';
+        const POKEAPI_URL = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPokemonList();
+        });
+
+        async function loadPokemonList() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/pokemon-list`);
+                let pokemons = await response.json();
+
+                if (!pokemons || pokemons.length === 0) {
+                    const pokeapiResponse = await fetch(POKEAPI_URL);
+                    const data = await pokeapiResponse.json();
+                    pokemons = data.results.map(p => p.name);
+                }
+
+                populateSelect(pokemons);
+            } catch (error) {
+                console.error("Error cargando Pokémon:", error);
+                populateSelect(['pikachu', 'charizard', 'bulbasaur', 'squirtle']);
+            }
+        }
+
+        function populateSelect(pokemonList) {
+            const select = document.getElementById('pokemon-select');
+            select.innerHTML = '<option value="">Selecciona un Pokémon</option>';
+
+            pokemonList.forEach(pokemon => {
+                const option = document.createElement('option');
+                option.value = pokemon;
+                option.textContent = pokemon.charAt(0).toUpperCase() + pokemon.slice(1);
+                select.appendChild(option);
+            });
+        }
+
+        function searchPokemon() {
+            const pokemon = document.getElementById('pokemon-select').value;
+            if (!pokemon) return;
+
+            document.getElementById('result').innerHTML = '<div class="loading"><span class="spinner"></span>Buscando Pokémon...</div>';
+
+            fetch(`${API_BASE_URL}/pokemon/${pokemon}`)
+                .then(handleResponse)
+                .catch(handleError);
+        }
+
+        function triggerException(type) {
+            document.getElementById('result').innerHTML = '<div class="loading"><span class="spinner"></span>Simulando excepción...</div>';
+
+            fetch(`${API_BASE_URL}/exceptions/${type}`)
+                .then(handleResponse)
+                .catch(handleError);
+        }
+
+        function handleResponse(response) {
+            if (!response.ok) {
+                return response.json().then(err => { throw err; });
+            }
+            return response.json().then(data => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `<strong>Status:</strong> ${data.status || 'success'}<br><br>` +
+                                            `<strong>Data:</strong><pre>${JSON.stringify(data.data || data, null, 2)}</pre>`;
+                resultDiv.className = 'result-container success';
+            });
+        }
+
+        function handleError(error) {
+            const resultDiv = document.getElementById('result');
+            if (error.message) {
+                try {
+                    const errData = JSON.parse(error.message);
+                    resultDiv.innerHTML = `<strong>Error Type:</strong> ${errData.type || 'UNKNOWN'}<br><br>` +
+                                                `<strong>Message:</strong> ${errData.message}<br><br>` +
+                                                `<strong>Details:</strong><pre>${errData.details || 'No details'}</pre>`;
+                } catch (e) {
+                    resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+                }
+            } else {
+                resultDiv.innerHTML = `<strong>Error:</strong> ${error}`;
+            }
+            resultDiv.className = 'result-container error';
+            console.error('Error:', error);
+        }
+    </script>
+</body>
+</html>
