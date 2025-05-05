@@ -1,4 +1,9 @@
 Ricardo\SisDisP2\model\Usuario.class
+Ricardo\SisDisP2\security\SecurityConfig.class
+Ricardo\SisDisP2\service\UsuarioService.class
+Ricardo\SisDisP2\controller\UsuarioController.class
+Ricardo\SisDisP2\repository\UsuarioRepository.class
 Ricardo\SisDisP2\controller\MainController.class
 Ricardo\SisDisP2\SisDisP2Application.class
+Ricardo\SisDisP2\security\UserDetailsServiceImpl.class
 Ricardo\SisDisP2\controller\MainController$1.class

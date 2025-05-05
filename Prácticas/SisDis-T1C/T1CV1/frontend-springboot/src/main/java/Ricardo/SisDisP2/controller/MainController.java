@@ -1,6 +1,7 @@
 package Ricardo.SisDisP2.controller;
-
+import java.util.Optional;
 import Ricardo.SisDisP2.model.Usuario;
+import Ricardo.SisDisP2.repository.UsuarioRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.Arrays;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 public class MainController {
@@ -24,15 +26,23 @@ public class MainController {
         return "login";
     }
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     @PostMapping("/login")
     public String login(@ModelAttribute Usuario usuario, Model model) {
-        if ("admin".equals(usuario.getUsername()) && "admin123".equals(usuario.getPassword())) {
+    Optional<Usuario> userOpt = usuarioRepository.findByUsername(usuario.getUsername());
+    if (userOpt.isPresent()) {
+        Usuario userFromDb = userOpt.get();
+        if (userFromDb.getPassword().equals(usuario.getPassword())) {
             return "redirect:/api-test";
-        } else {
-            model.addAttribute("error", "Credenciales inválidas");
-            return "login";
         }
     }
+
+    model.addAttribute("error", "Credenciales inválidas");
+    return "login";
+}
+
 
     @GetMapping("/api-test")
     public String apiTest(Model model) {

@@ -1,3 +1,8 @@
-C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-P2\P2V5\frontend-springboot\src\main\java\Ricardo\SisDisP2\controller\MainController.java
-C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-P2\P2V5\frontend-springboot\src\main\java\Ricardo\SisDisP2\SisDisP2Application.java
-C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-P2\P2V5\frontend-springboot\src\main\java\Ricardo\SisDisP2\model\Usuario.java
+C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV1\frontend-springboot\src\main\java\Ricardo\SisDisP2\controller\UsuarioController.java
+C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV1\frontend-springboot\src\main\java\Ricardo\SisDisP2\model\Usuario.java
+C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV1\frontend-springboot\src\main\java\Ricardo\SisDisP2\service\UsuarioService.java
+C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV1\frontend-springboot\src\main\java\Ricardo\SisDisP2\security\UserDetailsServiceImpl.java
+C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV1\frontend-springboot\src\main\java\Ricardo\SisDisP2\security\SecurityConfig.java
+C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV1\frontend-springboot\src\main\java\Ricardo\SisDisP2\controller\MainController.java
+C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV1\frontend-springboot\src\main\java\Ricardo\SisDisP2\repository\UsuarioRepository.java
+C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV1\frontend-springboot\src\main\java\Ricardo\SisDisP2\SisDisP2Application.java
