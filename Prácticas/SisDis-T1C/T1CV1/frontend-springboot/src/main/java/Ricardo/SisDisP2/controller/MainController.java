@@ -1,4 +1,5 @@
 package Ricardo.SisDisP2.controller;
+
 import java.util.Optional;
 import Ricardo.SisDisP2.model.Usuario;
 import Ricardo.SisDisP2.repository.UsuarioRepository;
@@ -29,6 +30,8 @@ public class MainController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    // al implementar Seguridad comento el metodo de login manual
+    /*
     @PostMapping("/login")
     public String login(@ModelAttribute Usuario usuario, Model model) {
     Optional<Usuario> userOpt = usuarioRepository.findByUsername(usuario.getUsername());
@@ -38,12 +41,13 @@ public class MainController {
             return "redirect:/api-test";
         }
     }
+   
 
     model.addAttribute("error", "Credenciales inválidas");
     return "login";
 }
 
-
+ */
     @GetMapping("/api-test")
     public String apiTest(Model model) {
         model.addAttribute("pokemonList", 
