@@ -1,20 +1,27 @@
 package Ricardo.SisDisP2.controller;
 
-import java.util.Optional;
 import Ricardo.SisDisP2.model.Usuario;
 import Ricardo.SisDisP2.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.boot.CommandLineRunner;
+
 import java.util.Arrays;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String home() {
@@ -22,52 +29,47 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
+    public String showLoginForm(Model model, @RequestParam(value = "error", required = false) String error) {
+        if (error != null) {
+            model.addAttribute("error", "Credenciales inválidas");
+        }
         model.addAttribute("usuario", new Usuario());
         return "login";
     }
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    // al implementar Seguridad comento el metodo de login manual
-    /*
-    @PostMapping("/login")
-    public String login(@ModelAttribute Usuario usuario, Model model) {
-    Optional<Usuario> userOpt = usuarioRepository.findByUsername(usuario.getUsername());
-    if (userOpt.isPresent()) {
-        Usuario userFromDb = userOpt.get();
-        if (userFromDb.getPassword().equals(usuario.getPassword())) {
-            return "redirect:/api-test";
-        }
-    }
-   
-
-    model.addAttribute("error", "Credenciales inválidas");
-    return "login";
-}
-
- */
     @GetMapping("/api-test")
     public String apiTest(Model model) {
-        model.addAttribute("pokemonList", 
-            Arrays.asList("pikachu", "charizard", "bulbasaur", "squirtle"));
+        model.addAttribute("pokemonList",
+                Arrays.asList("pikachu", "charizard", "bulbasaur", "squirtle"));
         return "api-test";
     }
 
-    // Agregar configuración de recursos estáticos
+    // Cargar usuario por defecto al iniciar y compilar el 
+    @Bean
+    public CommandLineRunner initAdminUser() {
+        return args -> {
+            if (usuarioRepository.findByUsername("admin").isEmpty()) {
+                Usuario admin = new Usuario();
+                admin.setUsername("admin");
+                admin.setPassword(passwordEncoder.encode("admin123")); // Contraseña hasheada
+                usuarioRepository.save(admin);
+                System.out.println("Usuario 'admin' creado con contraseña 'admin123'");
+            }
+        };
+    }
+
+    // Configuración de recursos estáticos
     @Bean
     public WebMvcConfigurer webMvcConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
-                // Configura la ruta de los recursos estáticos (CSS, JS, imágenes, etc.)
                 registry.addResourceHandler("/css/**")
-                    .addResourceLocations("classpath:/static/css/");
+                        .addResourceLocations("classpath:/static/css/");
                 registry.addResourceHandler("/js/**")
-                    .addResourceLocations("classpath:/static/js/");
+                        .addResourceLocations("classpath:/static/js/");
                 registry.addResourceHandler("/images/**")
-                    .addResourceLocations("classpath:/static/images/");
+                        .addResourceLocations("classpath:/static/images/");
             }
         };
     }
