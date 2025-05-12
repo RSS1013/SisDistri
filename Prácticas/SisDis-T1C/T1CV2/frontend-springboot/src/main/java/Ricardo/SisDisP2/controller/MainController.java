@@ -58,9 +58,9 @@ public class MainController {
                 admin.setUsername("admin");
                 admin.setPassword(passwordEncoder.encode("admin123")); // contraseña encriptada
                 usuarioRepository.save(admin);
-                System.out.println("✅ Usuario 'admin' creado con contraseña 'admin123'");
+                System.out.println("Usuario 'admin' creado con contraseña 'admin123'");
             } else {
-                System.out.println("ℹ️ Usuario 'admin' ya existe");
+                System.out.println("Usuario 'admin' ya existe");
             }
         };
     }

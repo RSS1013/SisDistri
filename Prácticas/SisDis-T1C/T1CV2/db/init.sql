@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 DELETE FROM usuarios WHERE username = 'admin';
 
-#INSERT INTO usuarios (username, password) VALUES ('RSadmin', 'RSadmin123');
+/*INSERT INTO usuarios (username, password) VALUES ('RSadmin', 'RSadmin123');*/
