@@ -28,6 +28,11 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard";
+    }
+
     @GetMapping("/login")
     public String showLoginForm(Model model, @RequestParam(value = "error", required = false) String error) {
         if (error != null) {
@@ -44,7 +49,7 @@ public class MainController {
         return "api-test";
     }
 
-    // Cargar usuario por defecto al iniciar y compilar el 
+    // Cargar usuario por defecto al iniciar la aplicación
     @Bean
     public CommandLineRunner initAdminUser() {
         return args -> {

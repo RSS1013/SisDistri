@@ -2,34 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Usuarios</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class="mb-4">Usuarios</h1>
-    <a th:href="@{/usuarios/nuevo}" class="btn btn-success mb-3">Nuevo Usuario</a>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Usuario</th>
-                <th>Contraseña</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="usuario : ${usuarios}">
-                <td th:text="${usuario.id}"></td>
-                <td th:text="${usuario.username}"></td>
-                <td th:text="${usuario.password}"></td>
-                <td>
-                    <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn btn-primary btn-sm">Editar</a>
-                    <a th:href="@{/usuarios/eliminar/{id}(id=${usuario.id})}" class="btn btn-danger btn-sm">Eliminar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <header>
+        <div class="logo">ExceptTester</div>
+        <nav>
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}">Logout</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Usuarios Registrados</h1>
+
+        <div class="text-right mb-3">
+            <a class="btn" th:href="@{/usuarios/nuevo}">+ Nuevo Usuario</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}"></td>
+                    <td th:text="${usuario.username}"></td>
+                    <td>
+                        <a class="btn btn-small" th:href="@{/usuarios/editar/{id}(id=${usuario.id})}">Editar</a>
+                        <a class="btn btn-small btn-danger" th:href="@{/usuarios/eliminar/{id}(id=${usuario.id})}"
+                           onclick="return confirm('¿Estás seguro de eliminar este usuario?');">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
 </body>
 </html>

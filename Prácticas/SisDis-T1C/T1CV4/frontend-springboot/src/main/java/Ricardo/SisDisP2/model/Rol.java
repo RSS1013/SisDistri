@@ -3,14 +3,17 @@ package Ricardo.SisDisP2.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "roles")
 public class Rol {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
 
-    public Rol() {}
+    public Rol() {
+    }
 
     public Rol(String nombre) {
         this.nombre = nombre;
