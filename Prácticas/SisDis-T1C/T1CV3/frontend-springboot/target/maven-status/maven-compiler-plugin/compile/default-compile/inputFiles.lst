@@ -3,6 +3,7 @@ C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV3\frontend-sp
 C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV3\frontend-springboot\src\main\java\Ricardo\SisDisP2\dto\UsuarioDto.java
 C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV3\frontend-springboot\src\main\java\Ricardo\SisDisP2\model\Usuario.java
 C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV3\frontend-springboot\src\main\java\Ricardo\SisDisP2\dto\LoginDto.java
+C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV3\frontend-springboot\src\main\java\Ricardo\SisDisP2\VerificaHash.java
 C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV3\frontend-springboot\src\main\java\Ricardo\SisDisP2\repository\UsuarioRepository.java
 C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV3\frontend-springboot\src\main\java\Ricardo\SisDisP2\repository\RolRepository.java
 C:\Users\gprod\Documents\GitHub\SisDistri\Prácticas\SisDis-T1C\T1CV3\frontend-springboot\src\main\java\Ricardo\SisDisP2\controller\UsuarioController.java

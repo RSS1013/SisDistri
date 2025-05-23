@@ -1,5 +1,6 @@
 Ricardo\SisDisP2\repository\RolRepository.class
 Ricardo\SisDisP2\dto\LoginDto.class
+Ricardo\SisDisP2\VerificaHash.class
 Ricardo\SisDisP2\dto\UsuarioDto.class
 Ricardo\SisDisP2\controller\UsuarioController.class
 Ricardo\SisDisP2\controller\MainController.class
