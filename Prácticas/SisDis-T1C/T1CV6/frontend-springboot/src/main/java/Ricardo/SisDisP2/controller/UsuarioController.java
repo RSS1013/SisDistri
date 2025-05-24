@@ -12,7 +12,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.access.prepost.PreAuthorize;
+import Ricardo.SisDisP2.dto.UsuarioDto;
+import Ricardo.SisDisP2.model.Rol;
 
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.security.Principal;
 
 
@@ -48,36 +52,60 @@ private boolean isAdmin() {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/nuevo")
     public String mostrarFormularioAlta(Model model) {
-    model.addAttribute("usuario", new Usuario());
+    model.addAttribute("usuarioDto", new UsuarioDto());
     model.addAttribute("rolesDisponibles", rolRepository.findAll());
     return "usuario-form";
         }
 
     @PostMapping("/guardar")
-    public String guardarUsuario(@ModelAttribute Usuario usuario) {
-        // Si es nuevo o edición sin cambio de contraseña
-        if (!usuario.getPassword().startsWith("$2a$")) {
-            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-        }
-        usuarioRepository.save(usuario);
-        return "redirect:/usuarios";
+public String guardarUsuario(@ModelAttribute UsuarioDto usuarioDto) {
+    Usuario usuario;
+
+    if (usuarioDto.getId() != null) {
+        usuario = usuarioRepository.findById(usuarioDto.getId())
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + usuarioDto.getId()));
+    } else {
+        usuario = new Usuario();
     }
+
+    usuario.setUsername(usuarioDto.getUsername());
+
+    // Solo actualiza contraseña si viene una nueva
+    if (usuarioDto.getPassword() != null && !usuarioDto.getPassword().isBlank()) {
+        if (!usuarioDto.getPassword().startsWith("$2a$")) {
+            usuario.setPassword(passwordEncoder.encode(usuarioDto.getPassword()));
+        } else {
+            usuario.setPassword(usuarioDto.getPassword());
+        }
+    }
+
+    // Convertir ids de roles a objetos Rol
+    Set<Rol> roles = usuarioDto.getRoles().stream()
+        .map(id -> rolRepository.findById(id).orElseThrow(() -> new RuntimeException("Rol no encontrado: " + id)))
+        .collect(Collectors.toSet());
+
+    usuario.setRoles(roles);
+
+    usuarioRepository.save(usuario);
+    return "redirect:/usuarios";
+}
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/editar/{id}")
     public String editarUsuario(@PathVariable Long id, Model model) {
     Usuario usuario = usuarioRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("ID inválido: " + id));
-    model.addAttribute("usuario", usuario);
+            .orElseThrow(() -> new IllegalArgumentException("ID inválido: " + id));
+
+    UsuarioDto usuarioDto = new UsuarioDto();
+    usuarioDto.setId(usuario.getId());
+    usuarioDto.setUsername(usuario.getUsername());
+    usuarioDto.setPassword(""); // Nunca se expone la contraseña real
+    usuarioDto.setRoles(usuario.getRoles().stream().map(Rol::getId).collect(Collectors.toSet()));
+
+    model.addAttribute("usuarioDto", usuarioDto);
     model.addAttribute("rolesDisponibles", rolRepository.findAll());
     return "usuario-form";
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/eliminar/{id}")
-    public String eliminarUsuario(@PathVariable Long id) {
-        usuarioRepository.deleteById(id);
-        return "redirect:/usuarios";
     }
 
     @GetMapping("/perfil")
@@ -86,5 +114,13 @@ private boolean isAdmin() {
        model.addAttribute("usuario", usuario);
        return "perfil-form"; // nueva plantilla para editar solo la contraseña
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/eliminar/{id}")
+    public String eliminarUsuario(@PathVariable Long id) {
+       usuarioRepository.deleteById(id);
+       return "redirect:/usuarios";
+    }
+
 
 }

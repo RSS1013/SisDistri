@@ -17,9 +17,9 @@
 
     <main class="container">
      <div class="centered-section">
-        <h1 th:text="${usuario.id == null ? 'Nuevo Usuario' : 'Editar Usuario'}"></h1>
+        <h1 th:text="${usuarioDto.id == null ? 'Nuevo Usuario' : 'Editar Usuario'}"></h1>
 
-        <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="post">
+        <form th:action="@{/usuarios/guardar}" th:object="${usuarioDto}" method="post">
             <!-- Protección CSRF -->
             <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
             <input type="hidden" th:field="*{id}" />
