@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <header>
+        <div class="logo">ExceptTester</div>
+        <nav>
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}">Logout</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Usuarios Registrados</h1>
+
+        <div class="text-right mb-3">
+            <a class="btn" th:href="@{/usuarios/nuevo}">+ Nuevo Usuario</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Roles</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}">1</td>
+                    <td th:text="${usuario.username}">nombre</td>
+                    <td>
+                        <span th:each="rol, iterStat : ${usuario.roles}">
+                            <span th:text="${rol.nombre}"></span><span th:if="${!iterStat.last}">, </span>
+                        </span>
+                    </td>
+                    <td>
+                        <div sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{'/usuarios/editar/' + ${usuario.id}}" class="btn">Editar</a>
+                            <a th:href="@{'/usuarios/eliminar/' + ${usuario.id}}" class="btn eliminar"
+                               onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
