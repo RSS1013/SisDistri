@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Value;
+
 
 import java.util.Arrays;
 
@@ -24,8 +26,9 @@ public class MainController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
-    public String home() {
-        return "index";
+    public String home(Model model, @Value("${google.maps.api.key}") String apiKey) {
+    model.addAttribute("googleApiKey", apiKey);
+       return "index";
     }
 
     @GetMapping("/dashboard")
@@ -54,7 +57,7 @@ public class MainController {
         return "acceso-denegado";
     }
 
-
+    
     // Cargar usuario por defecto al iniciar la aplicación
     @Bean
     public CommandLineRunner initAdminUser() {

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SisDis - ExceptTester - Home</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+<script async
+        th:src="@{'https://maps.googleapis.com/maps/api/js?key=' + ${googleApiKey} + '&callback=initMap'}"
+        defer></script>
+
 </head>
 <body>
     <header>
@@ -52,6 +56,8 @@
         </div>
     </div>
 
+<div id="map" style="height: 400px; width: 100%; margin-top: 30px;"></div>
+
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -86,5 +92,20 @@
             © 2025 ExceptTester. All rights reserved.
         </div>
     </footer>
+<script>
+    function initMap() {
+        const location = { lat: 42.3439923, lng: -3.696906 }; // Ejemplo: UBU
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15,
+            center: location
+        });
+        new google.maps.Marker({
+            position: location,
+            map: map,
+            title: "Universidad de Burgos"
+        });
+    }
+</script>
+
 </body>
 </html>
