@@ -57,7 +57,11 @@ public class MainController {
         return "acceso-denegado";
     }
 
-    
+    @GetMapping("/webchat")
+    public String webchat() {
+        return "webchat";
+    }
+
     // Cargar usuario por defecto al iniciar la aplicación
     @Bean
     public CommandLineRunner initAdminUser() {

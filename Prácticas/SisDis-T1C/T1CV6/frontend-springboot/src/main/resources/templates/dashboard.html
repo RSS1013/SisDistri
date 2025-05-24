@@ -6,62 +6,74 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
-    <header>
-        <div class="logo">ExceptTester</div>
-        <nav>
-            <a href="/">Home</a>
-            <a th:href="@{/dashboard}">Dashboard</a>
-            <a th:href="@{/logout}">Logout</a>
-        </nav>
-    </header>
+<header>
+    <div class="logo">ExceptTester</div>
+    <nav>
+        <a href="/">Home</a>
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/logout}">Logout</a>
+    </nav>
+</header>
 
-    <section class="hero">
-        <h1>Panel de Control</h1>
-        <p>Accede a todas las funcionalidades del sistema</p>
-    </section>
+<section class="hero">
+    <h1>Panel de Control</h1>
+    <p>Accede a todas las funcionalidades del sistema</p>
+</section>
 
-    <main class="container">
-        <div class="features">
-            <div class="section feature-card">
-                <h3>Testing de Excepciones</h3>
-                <p>Simula errores y prueba la comunicación con la API.</p>
-                <a th:href="@{/api-test}" class="btn">Ir a Testing</a>
-            </div>
-
-            <div class="section feature-card">
-                <h3>Gestión de Usuarios</h3>
-                <p>Alta, edición y eliminación de usuarios registrados.</p>
-                <a th:href="@{/usuarios}" class="btn">Ir a Usuarios</a>
-            </div>
-
-            <div class="section feature-card">
-                <h3>Próximas Funcionalidades</h3>
-                <p>Enlaces a nuevas herramientas en desarrollo.</p>
-                <a href="#" class="btn btn-secondary">Próximamente</a>
-            </div>
+<main class="container">
+    <div class="features">
+        <div class="section feature-card">
+            <h3>Testing de Excepciones</h3>
+            <p>Simula errores y prueba la comunicación con la API.</p>
+            <a th:href="@{/api-test}" class="btn">Ir a Testing</a>
         </div>
-    </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>ExceptTester</h3>
-                <p>Una Interface moderna para el testeo de exceptions y API interacción.</p>
-            </div>
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a th:href="@{/dashboard}">Dashboard</a></li>
-                    <li><a th:href="@{/api-test}">Testing</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="https://pokeapi.co/">PokeAPI</a></li>
-                    <li><a href="#">Documentación</a></li>
-                    <li><a href="#">Referencia API</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
+        <div class="section feature-card">
+            <h3>Gestión de Usuarios</h3>
+            <p>Alta, edición y eliminación de usuarios registrados.</p>
+            <a th:href="@{/usuarios}" class="btn">Ir a Usuarios</a>
+        </div>
+
+        <div class="section feature-card">
+            <h3>Chat en Tiempo Real</h3>
+            <p>Comunícate con otros usuarios en tiempo real mediante WebSocket.</p>
+            <a th:href="@{/webchat}" class="btn">Ir al Chat</a>
+        </div>
+
+        <div class="section feature-card">
+            <h3>Próximas Funcionalidades</h3>
+            <p>Enlaces a nuevas herramientas en desarrollo.</p>
+            <a href="#" class="btn btn-secondary">Próximamente</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>ExceptTester</h3>
+            <p>Una Interface moderna para el testeo de exceptions y API interacción.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a th:href="@{/dashboard}">Dashboard</a></li>
+                <li><a th:href="@{/api-test}">Testing</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="https://pokeapi.co/">PokeAPI</a></li>
+                <li><a href="#">Documentación</a></li>
+                <li><a href="#">Referencia API</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2025 ExceptTester. All rights reserved.
+    </div>
+</footer>
+</body>
+</html>

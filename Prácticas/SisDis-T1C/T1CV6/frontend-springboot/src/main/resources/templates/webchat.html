@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WebChat - ExceptTester</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <style>
+        #chat { border: 1px solid #ccc; height: 300px; overflow-y: scroll; margin-bottom: 10px; padding: 10px; }
+        .message { margin: 5px 0; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">ExceptTester</div>
+    <nav>
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/logout}">Logout</a>
+    </nav>
+</header>
+
+<main class="container">
+    <h1>Chat en Tiempo Real</h1>
+    <div id="chat"></div>
+    <input type="text" id="messageInput" placeholder="Escribe tu mensaje..." />
+    <button onclick="sendMessage()">Enviar</button>
+</main>
+
+<script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('messageInput');
+
+    const socket = new WebSocket('ws://' + window.location.host + '/chat');
+
+    socket.onmessage = function(event) {
+        const message = document.createElement('div');
+        message.classList.add('message');
+        message.textContent = event.data;
+        chat.appendChild(message);
+        chat.scrollTop = chat.scrollHeight;
+    };
+
+    function sendMessage() {
+        const msg = input.value.trim();
+        if (msg) {
+            socket.send(msg);
+            input.value = '';
+        }
+    }
+
+    input.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+</script>
+</body>
+</html>
