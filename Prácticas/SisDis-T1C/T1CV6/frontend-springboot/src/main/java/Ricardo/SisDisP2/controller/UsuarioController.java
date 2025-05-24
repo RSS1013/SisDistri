@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.access.prepost.PreAuthorize;
 
+import java.security.Principal;
 
 
 
@@ -78,4 +79,12 @@ private boolean isAdmin() {
         usuarioRepository.deleteById(id);
         return "redirect:/usuarios";
     }
+
+    @GetMapping("/perfil")
+    public String editarPerfil(Model model, Principal principal) {
+       Usuario usuario = usuarioRepository.findByUsername(principal.getName()).orElseThrow();
+       model.addAttribute("usuario", usuario);
+       return "perfil-form"; // nueva plantilla para editar solo la contraseña
+    }
+
 }

@@ -313,3 +313,12 @@ footer {
     gap: 1.5rem;
     padding-top: 1rem;
 }
+
+.centered-section {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}

@@ -19,7 +19,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
+            //.csrf().disable() // Voy intentar implementar csrf comento la línea
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/index", "/login", "/css/**", "/js/**").permitAll()
                 .requestMatchers("/dashboard", "/usuarios/**", "/api-test/**").authenticated()

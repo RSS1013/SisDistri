@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.beans.factory.annotation.Value;
 
-
+import java.security.Principal;
 import java.util.Arrays;
 
 @Controller
@@ -27,8 +27,8 @@ public class MainController {
 
     @GetMapping("/")
     public String home(Model model, @Value("${google.maps.api.key}") String apiKey) {
-    model.addAttribute("googleApiKey", apiKey);
-       return "index";
+        model.addAttribute("googleApiKey", apiKey);
+        return "index";
     }
 
     @GetMapping("/dashboard")
@@ -62,6 +62,23 @@ public class MainController {
         return "webchat";
     }
 
+    // Mostrar formulario de perfil
+    @GetMapping("/perfil")
+    public String perfilUsuario(Model model, Principal principal) {
+        Usuario usuario = usuarioRepository.findByUsername(principal.getName()).orElseThrow();
+        model.addAttribute("usuario", usuario);
+        return "perfil-form";
+    }
+
+    // Guardar nueva contraseña
+    @PostMapping("/perfil/guardar")
+    public String guardarPerfil(@ModelAttribute Usuario usuario, Principal principal) {
+        Usuario actual = usuarioRepository.findByUsername(principal.getName()).orElseThrow();
+        actual.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        usuarioRepository.save(actual);
+        return "redirect:/dashboard?actualizado";
+    }
+
     // Cargar usuario por defecto al iniciar la aplicación
     @Bean
     public CommandLineRunner initAdminUser() {
@@ -69,7 +86,7 @@ public class MainController {
             if (usuarioRepository.findByUsername("admin").isEmpty()) {
                 Usuario admin = new Usuario();
                 admin.setUsername("admin");
-                admin.setPassword(passwordEncoder.encode("admin123")); // Contraseña hasheada
+                admin.setPassword(passwordEncoder.encode("admin123"));
                 usuarioRepository.save(admin);
                 System.out.println("Usuario 'admin' creado con contraseña 'admin123'");
             }
@@ -92,3 +109,4 @@ public class MainController {
         };
     }
 }
+

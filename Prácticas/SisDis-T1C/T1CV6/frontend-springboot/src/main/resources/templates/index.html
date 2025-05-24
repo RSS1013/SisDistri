@@ -3,98 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SisDis - ExceptTester - Home</title>
+    <title>SisDisTools - Inicio</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
-<script async
+    <script async
         th:src="@{'https://maps.googleapis.com/maps/api/js?key=' + ${googleApiKey} + '&callback=initMap'}"
         defer></script>
-
 </head>
 <body>
-    <header>
-        <div class="logo">ExceptTester</div>
-        <nav>
-            <a href="/">Home</a>
-            <a th:href="@{/login}">Login</a>
-            <a href="#">Testing</a>
-        </nav>
-    </header>
+<header>
+    <div class="logo">SisDisTools</div>
+    <nav>
+        <a href="/">Home</a>
+        <a th:href="@{/login}">Login</a>
+        <a href="#">Testing</a>
+    </nav>
+</header>
 
-    <section class="hero">
-        <h1>Sistema Distribuido de Excepciones</h1>
-        <p>Una plataforma moderna para probar excepciones y API interacciones en sistemas distribuidos.</p>
-        <a th:href="@{/login}" class="btn">Login →</a>
-    </section>
+<section class="hero">
+    <h1>Bienvenido a Sistema Distribuido SisDisTools</h1>
+    <p>Una plataforma moderna con múltiples herramientas para entornos distribuidos.</p>
+    <a th:href="@{/login}" class="btn">Login →</a>
+</section>
 
-    <div class="container">
-        <div class="features">
-            <div class="section feature-card">
-                <h3>Simulación de Errores de Base de Datos</h3>
-                <p>Simula y captura errores de conexión, consultas y transacciones en bases de datos.</p>
-                <a th:href="@{/login}" class="btn">Probar ahora →</a>
-            </div>
-            <div class="section feature-card">
-                <h3>Pruebas de API externas</h3>
-                <p>Interactúa con APIs externas como PokeAPI y maneja respuestas y errores de forma elegante.</p>
-                <a th:href="@{/login}" class="btn">Explorar funciones →</a>
-            </div>
-            <div class="section feature-card">
-                <h3>Manejo de Excepciones Personalizado</h3>
-                <p>Simula errores de archivos y observa cómo se manejan las excepciones en el sistema.</p>
-                <a th:href="@{/login}" class="btn">Ver como →</a>
-            </div>
+<div class="container">
+    <div class="features">
+        <div class="section feature-card">
+            <h3>Simulación de Errores de Base de Datos</h3>
+            <p>Simula y captura errores de conexión, consultas y transacciones en bases de datos.</p>
+            <a th:href="@{/login}" class="btn">Probar ahora →</a>
+        </div>
+        <div class="section feature-card">
+            <h3>Pruebas de API externas</h3>
+            <p>Interactúa con APIs externas como PokeAPI y maneja respuestas y errores de forma elegante.</p>
+            <a th:href="@{/login}" class="btn">Explorar funciones →</a>
+        </div>
+        <div class="section feature-card">
+            <h3>Manejo de Excepciones Personalizado</h3>
+            <p>Simula errores de archivos y observa cómo se manejan las excepciones en el sistema.</p>
+            <a th:href="@{/login}" class="btn">Ver como →</a>
         </div>
 
-        <div class="section text-center">
-            <h2>¿Por qué usar nuestro sistema?</h2>
-            <div class="benefits-list mt-3">
-                <div class="benefit-item">Pruebas Simuladas - Simula errores sin riesgos reales en tu ambiente de producción.</div>
-                <div class="benefit-item">Resultados Detallados - Visualiza errores y respuestas con formato claro y legible.</div>
-                <div class="benefit-item">Interfaz Intuitiva - Diseño moderno y fácil de usar para pruebas eficientes.</div>
-                <div class="benefit-item">Integración API - Prueba tus integraciones con APIs externas fácilmente.</div>
-            </div>
+        <!-- Nuevas funcionalidades -->
+        <div class="section feature-card">
+            <h3>Gestión de Usuarios</h3>
+            <p>Accede al panel de administración para crear, editar y eliminar usuarios.</p>
+            <a th:href="@{/login}" class="btn">Gestionar Usuarios →</a>
+        </div>
+        <div class="section feature-card">
+            <h3>Chat en Tiempo Real</h3>
+            <p>Comunícate al instante mediante WebSockets integrados.</p>
+            <a th:href="@{/login}" class="btn">Ir al WebChat →</a>
+        </div>
+        <div class="section feature-card">
+            <h3>Mapa Interactivo</h3>
+            <p>Explora la ubicación de nuestros servicios directamente desde el mapa.</p>
+            <a th:href="@{/login}" class="btn">Ver Mapa →</a>
+        </div>
+        <div class="section feature-card">
+            <h3>Blockchain de Votos</h3>
+            <p>Verifica votos de forma segura con tecnología blockchain.</p>
+            <a th:href="@{/login}" class="btn">Acceder a Votación →</a>
         </div>
     </div>
 
+    <div class="section text-center">
+        <h2>¿Por qué usar nuestro sistema?</h2>
+        <div class="benefits-list mt-3">
+            <div class="benefit-item">Pruebas Simuladas - Simula errores sin riesgos reales en tu ambiente de producción.</div>
+            <div class="benefit-item">Resultados Detallados - Visualiza errores y respuestas con formato claro y legible.</div>
+            <div class="benefit-item">Interfaz Intuitiva - Diseño moderno y fácil de usar para pruebas eficientes.</div>
+            <div class="benefit-item">Integración API - Prueba tus integraciones con APIs externas fácilmente.</div>
+        </div>
+    </div>
+</div>
+
 <div id="map" style="height: 400px; width: 100%; margin-top: 30px;"></div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>ExceptTester</h3>
-                <p>Una Interface moderna para el testeo de exceptions y API interacción.</p>
-            </div>
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a th:href="@{/login}">Login</a></li>
-                    <li><a href="#">Testing Interface</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="https://pokeapi.co/">PokeAPI</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">API Reference</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Contact</h3>
-                <ul>
-                    <li>Email: rss1013@alu.ubu.es</li>
-                    <li>Support: rss1013@alu.ubu.es</li>
-                </ul>
-            </div>
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>SisDisTools</h3>
+            <p>Una interface moderna para herramientas distribuidas y gestión de excepciones.</p>
         </div>
-        <div class="copyright">
-            © 2025 ExceptTester. All rights reserved.
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a href="#">Testing Interface</a></li>
+            </ul>
         </div>
-    </footer>
+        <div class="footer-column">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="https://pokeapi.co/">PokeAPI</a></li>
+                <li><a href="#">Documentación</a></li>
+                <li><a href="#">API Reference</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <ul>
+                <li>Email: rss1013@alu.ubu.es</li>
+                <li>Support: rss1013@alu.ubu.es</li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2025 SisDisTools. All rights reserved.
+    </div>
+</footer>
+
 <script>
     function initMap() {
-        const location = { lat: 42.3439923, lng: -3.696906 }; // Ejemplo: UBU
+        const location = { lat: 42.3439923, lng: -3.696906 }; // Universidad de Burgos
         const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 15,
             center: location
@@ -106,6 +128,5 @@
         });
     }
 </script>
-
 </body>
 </html>
