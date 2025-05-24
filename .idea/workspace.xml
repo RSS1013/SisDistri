@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92f71753-7c86-4a88-a813-42a24f5446a3" name="Changes" comment="" />
+    <list default="true" id="92f71753-7c86-4a88-a813-42a24f5446a3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +32,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/gprod/Documents/GitHub/SisDistri/Prácticas/SisDis-T1C/T1CV6/frontend-springboot/pom.xml",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -48,7 +51,7 @@
       <updated>1744406424933</updated>
       <workItem from="1744406427509" duration="185000" />
       <workItem from="1744413111106" duration="256000" />
-      <workItem from="1748122579679" duration="670000" />
+      <workItem from="1748122579679" duration="2423000" />
     </task>
     <servers />
   </component>

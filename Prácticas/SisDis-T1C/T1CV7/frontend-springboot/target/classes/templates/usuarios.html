@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <header>
+        <div class="logo">ExceptTester</div>
+        <nav>
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}">Logout</a>
+        </nav>
+    </header>
+
+    <main class="container">
+      <div class="centered-section">
+        <h1>Usuarios Registrados</h1>
+
+        <div class="text-right mb-3">
+            <a class="btn" th:href="@{/usuarios/nuevo}">+ Nuevo Usuario</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Roles</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}">1</td>
+                    <td th:text="${usuario.username}">nombre</td>
+                    <td>
+                        <span th:each="rol, iterStat : ${usuario.roles}">
+                            <span th:text="${rol.nombre}"></span><span th:if="${!iterStat.last}">, </span>
+                        </span>
+                    </td>
+                    <td>
+                        <div sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{'/usuarios/editar/' + ${usuario.id}}" class="btn">Editar</a>
+                            <a th:href="@{'/usuarios/eliminar/' + ${usuario.id}}" class="btn eliminar"
+                               onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </main>
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>SisDisTools</h3>
+            <p>Una interface moderna para herramientas distribuidas y gestión de excepciones.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a href="#">Testing Interface</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="https://pokeapi.co/">PokeAPI</a></li>
+                <li><a href="#">Documentación</a></li>
+                <li><a href="#">API Reference</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <ul>
+                <li>Email: rss1013@alu.ubu.es</li>
+                <li>Support: rss1013@alu.ubu.es</li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2025 SisDisTools. All rights reserved.
+    </div>
+</footer>
+
+<script>
+    function initMap() {
+        const location = { lat: 42.3439923, lng: -3.696906 }; // Universidad de Burgos
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15,
+            center: location
+        });
+        new google.maps.Marker({
+            position: location,
+            map: map,
+            title: "Universidad de Burgos"
+        });
+    }
+</script>
+</body>
+</html>

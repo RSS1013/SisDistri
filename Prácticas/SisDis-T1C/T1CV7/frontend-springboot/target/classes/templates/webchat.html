@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SisDisTools - WebChat - </title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <style>
+        #chat { border: 1px solid #ccc; height: 300px; overflow-y: scroll; margin-bottom: 10px; padding: 10px; }
+        .message { margin: 5px 0; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">ExceptTester</div>
+    <nav>
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/logout}">Logout</a>
+    </nav>
+</header>
+
+<main class="container">
+  <div class="centered-section">
+    <h1>Chat en Tiempo Real</h1>
+    <div id="chat" aria-live="polite"></div>
+    <input type="text" id="messageInput" placeholder="Escribe tu mensaje..." aria-label="Escribe tu mensaje" />
+    <button onclick="sendMessage()">Enviar</button>
+  </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>SisDisTools</h3>
+            <p>Una interface moderna para herramientas distribuidas y gestión de excepciones.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a href="#">Testing Interface</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="https://pokeapi.co/">PokeAPI</a></li>
+                <li><a href="#">Documentación</a></li>
+                <li><a href="#">API Reference</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <ul>
+                <li>Email: rss1013@alu.ubu.es</li>
+                <li>Support: rss1013@alu.ubu.es</li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2025 SisDisTools. All rights reserved.
+    </div>
+</footer>
+
+<script>
+    function initMap() {
+        const location = { lat: 42.3439923, lng: -3.696906 }; // Universidad de Burgos
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15,
+            center: location
+        });
+        new google.maps.Marker({
+            position: location,
+            map: map,
+            title: "Universidad de Burgos"
+        });
+    }
+</script>
+
+<script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('messageInput');
+
+    const socket = new WebSocket('ws://' + window.location.host + '/chat');
+
+    socket.onmessage = function(event) {
+        const message = document.createElement('div');
+        message.classList.add('message');
+        message.textContent = sanitize(event.data);
+        chat.appendChild(message);
+        chat.scrollTop = chat.scrollHeight;
+    };
+
+    function sendMessage() {
+        const msg = input.value.trim();
+        if (msg) {
+            socket.send(msg);
+            input.value = '';
+        }
+    }
+
+    function sanitize(str) {
+        return str.replace(/[&<>"']/g, function (m) {
+            return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[m];
+        });
+    }
+
+    input.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+</script>
+</body>
+</html>

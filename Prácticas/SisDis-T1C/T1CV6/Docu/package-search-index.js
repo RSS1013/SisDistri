@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Ricardo.SisDisP2"},{"l":"Ricardo.SisDisP2.controller"},{"l":"Ricardo.SisDisP2.dto"},{"l":"Ricardo.SisDisP2.model"},{"l":"Ricardo.SisDisP2.repository"},{"l":"Ricardo.SisDisP2.security"},{"l":"Ricardo.SisDisP2.service"},{"l":"Ricardo.SisDisP2.websocket"}];updateSearchResults();

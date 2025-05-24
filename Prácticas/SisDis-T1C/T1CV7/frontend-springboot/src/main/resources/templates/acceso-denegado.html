@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso Denegado</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <header>
+        <div class="logo">ExceptTester</div>
+        <nav>
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}">Logout</a>
+        </nav>
+    </header>
+
+    <main class="container text-center">
+        <h1>Acceso Denegado</h1>
+        <p>No tienes permisos suficientes para acceder a esta sección.</p>
+        <a class="btn" th:href="@{/dashboard}">Volver al Dashboard</a>
+    </main>
+</body>
+</html>

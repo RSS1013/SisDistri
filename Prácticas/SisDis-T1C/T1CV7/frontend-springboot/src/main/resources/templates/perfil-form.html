@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil - Cambiar Contraseña</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header>
+    <div class="logo">ExceptTester</div>
+    <nav>
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/logout}">Logout</a>
+    </nav>
+</header>
+
+<main class="container">
+    <h1>Cambiar Contraseña</h1>
+
+    <form th:action="@{/perfil/guardar}" th:object="${usuario}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <div class="form-group">
+            <label for="password">Nueva Contraseña</label>
+            <input type="password" id="password" th:field="*{password}" required minlength="6" />
+        </div>
+
+        <button type="submit" class="btn mt-2">Actualizar Contraseña</button>
+    </form>
+</main>
+</body>
+</html>
