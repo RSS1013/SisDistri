@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 
 
 
@@ -42,6 +44,7 @@ private boolean isAdmin() {
         return "usuarios";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/nuevo")
     public String mostrarFormularioAlta(Model model) {
     model.addAttribute("usuario", new Usuario());
@@ -59,6 +62,7 @@ private boolean isAdmin() {
         return "redirect:/usuarios";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/editar/{id}")
     public String editarUsuario(@PathVariable Long id, Model model) {
     Usuario usuario = usuarioRepository.findById(id)
@@ -68,6 +72,7 @@ private boolean isAdmin() {
     return "usuario-form";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/eliminar/{id}")
     public String eliminarUsuario(@PathVariable Long id) {
         usuarioRepository.deleteById(id);

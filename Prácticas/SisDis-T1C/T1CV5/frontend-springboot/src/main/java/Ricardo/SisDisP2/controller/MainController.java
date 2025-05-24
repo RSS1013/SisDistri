@@ -49,6 +49,12 @@ public class MainController {
         return "api-test";
     }
 
+    @GetMapping("/acceso-denegado")
+    public String accesoDenegado() {
+        return "acceso-denegado";
+    }
+
+
     // Cargar usuario por defecto al iniciar la aplicación
     @Bean
     public CommandLineRunner initAdminUser() {
